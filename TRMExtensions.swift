@@ -8,6 +8,8 @@ import CoreLocation
 import Foundation
 import SwiftUI
 
+
+// MARK: - EXTENSIONS
 extension CGSize {
     /// The ratio of the size's width to height.
     var aspectRatio: Double {
@@ -15,7 +17,7 @@ extension CGSize {
     }
 }
 
-extension CLLocationCoordinate2D: Codable, Hashable {
+extension CLLocationCoordinate2D: Codable, @retroactive Hashable, @retroactive Equatable {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(latitude)
         hasher.combine(longitude)
@@ -81,6 +83,15 @@ extension Locale.Currency {
         return Locale.current.currency ?? Locale.Currency("USD")
     }
 }
+
+extension NavigationPath {
+    mutating func removeAll() {
+        self.removeLast(self.count)
+    }
+}
+
+
+// MARK: - ENUMS
 
 enum Icon: String, Identifiable, Codable {
     // housing
@@ -893,6 +904,7 @@ enum Icon: String, Identifiable, Codable {
         ]
     }
 }
+
 
 enum TRMColor: String, Identifiable, Codable {
     case red = "red"
