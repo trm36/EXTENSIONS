@@ -906,7 +906,8 @@ enum Icon: String, Identifiable, Codable {
 }
 
 
-enum TRMColor: String, Identifiable, Codable {
+enum TRMColor: String, Identifiable, Codable, CaseIterable {
+    // BASIC COLORS
     case red = "red"
     case orange = "orange"
     case yellow = "yellow"
@@ -916,6 +917,11 @@ enum TRMColor: String, Identifiable, Codable {
     case pink = "pink"
     case gray = "gray"
     case primary = "primary"
+    // OTHER COLORS
+    case primaryInvert = "primaryInvert"
+    case darkText = "darkText"
+    case lightText = "lightText"
+
 
     var id: TRMColor {
         return self
@@ -923,6 +929,7 @@ enum TRMColor: String, Identifiable, Codable {
 
     var color: Color {
         switch self {
+            // BASIC COLORS
         case .blue:
             return Color.blue
         case .gray:
@@ -941,11 +948,19 @@ enum TRMColor: String, Identifiable, Codable {
             return Color.red
         case .yellow:
             return Color.yellow
+            // OTHER COLORS
+        case .primaryInvert:
+            return Color(UIColor.systemBackground)
+        case .darkText:
+            return Color(UIColor.darkText)
+        case .lightText:
+            return Color.white
         }
     }
 
     var displayName: String {
         switch self {
+            // BASIC COLORS
         case .blue:
             return "Blue"
         case .gray:
@@ -964,10 +979,17 @@ enum TRMColor: String, Identifiable, Codable {
             return "Red"
         case .yellow:
             return "Yellow"
+            // OTHER COLORS
+        case .primaryInvert:
+            return "Invert"
+        case .darkText:
+            return "Dark Text"
+        case .lightText:
+            return "Light Text"
         }
     }
 
-    static var allColors: [TRMColor] {
+    static var basicColors: [TRMColor] {
         return [
             .pink,
             .red,
